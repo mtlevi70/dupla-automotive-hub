@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Dupla Automotive Hub
+
+The user's full website brief is attached. Use that brief as the source of requirements.
+
+Use the name DuplaÁsz. Keep location as a placeholder. Use placeholders for all contact details. A few pages. Design the whole front-end of the form, I'll build the form sending code behind it later. you dont have to use the logo's color; use colors that look good with the logo, but also keep in mind modern website design paradigms. Yes, build the site, starting with the homepage and a contemporary palette that complements the logo.
 
 This project was built with [Lovable](https://lovable.dev).
 
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/7a324ec9-0fa0-4149-8c0d-922748e745e2).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
