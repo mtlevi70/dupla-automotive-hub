@@ -41,12 +41,13 @@ export function ContactForm() {
     if (!result.success) {
       for (const issue of result.error.issues) next[String(issue.path[0])] ??= issue.message;
     }
-    if (files.length > MAX_FILES) next.photos = `You can attach up to ${MAX_FILES} photos.`;
-    else if (files.some((f) => f.size > MAX_MB * 1024 * 1024)) next.photos = `Each photo must be under ${MAX_MB} MB.`;
+    if (files.length > MAX_FILES) next["photos"] = `You can attach up to ${MAX_FILES} photos.`;
+    else if (files.some((f) => f.size > MAX_MB * 1024 * 1024)) next["photos"] = `Each photo must be under ${MAX_MB} MB.`;
     setErrors(next);
-    if (Object.keys(next).length) {
+    const firstKey = Object.keys(next)[0];
+    if (firstKey) {
       setNotice(null);
-      document.getElementById(Object.keys(next)[0])?.focus();
+      document.getElementById(firstKey)?.focus();
       return;
     }
     // TODO: connect sending here (e.g. POST result.data + files to your endpoint).
