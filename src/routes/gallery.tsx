@@ -86,7 +86,7 @@ function Gallery() {
         </div>
       </section>
 
-      <CtaBand />
+      <CtaBand title="Have something similar in mind?" text="Send us a few photos and we'll tell you what's possible." />
     </>
   );
 }
