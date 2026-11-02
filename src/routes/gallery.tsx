@@ -10,6 +10,7 @@ import armchair from "@/assets/gallery-armchair.jpg";
 import motoSeat from "@/assets/gallery-motorcycle-seat.jpg";
 import { SampleImage } from "@/components/site/SampleImage";
 import { CtaBand } from "@/components/site/CtaBand";
+import { Lightbox } from "@/components/site/Lightbox";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/gallery")({
@@ -41,6 +42,7 @@ const projects: { img: string; title: string; cat: Exclude<Category, "All"> }[] 
 
 function Gallery() {
   const [active, setActive] = useState<Category>("All");
+  const [open, setOpen] = useState<number | null>(null);
   const shown = active === "All" ? projects : projects.filter((p) => p.cat === active);
 
   return (
@@ -76,15 +78,26 @@ function Gallery() {
         </div>
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {shown.map((p) => (
+          {shown.map((p, i) => (
             <article key={p.title}>
-              <SampleImage src={p.img} alt={p.title} className="aspect-[4/3]" />
+              <button
+                type="button"
+                onClick={() => setOpen(i)}
+                aria-label={`View larger: ${p.title}`}
+                className="block w-full cursor-zoom-in overflow-hidden rounded-md transition-opacity hover:opacity-90"
+              >
+                <SampleImage src={p.img} alt={p.title} className="aspect-[4/3]" />
+              </button>
               <h2 className="mt-3 text-lg">{p.title}</h2>
               <p className="text-sm text-muted-foreground">{p.cat}</p>
             </article>
           ))}
         </div>
       </section>
+
+      {open !== null && (
+        <Lightbox items={shown} index={open} onClose={() => setOpen(null)} onIndex={setOpen} />
+      )}
 
       <CtaBand title="Have something similar in mind?" text="Send us a few photos and we'll tell you what's possible." />
     </>
