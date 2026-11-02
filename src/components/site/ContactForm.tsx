@@ -109,7 +109,7 @@ export function ContactForm() {
       </div>
       <div>
         <label className="flex items-start gap-3 text-sm">
-          <input id="consent" name="consent" type="checkbox" className="mt-0.5 size-5 accent-primary" {...aria("consent")} />
+          <input id="consent" name="consent" type="checkbox" className="size-5 accent-primary" {...aria("consent")} />
           <span>I agree that DuplaÁsz may use these details to reply to my request. {"["}Privacy policy link{"]"}</span>
         </label>
         {err("consent")}

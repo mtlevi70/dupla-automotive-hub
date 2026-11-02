@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import logoWhite from "@/assets/duplaasz-logo-white.png.asset.json";
+import logoWhite from "@/assets/white-duplaasz-logo.png";
 import { business, nav } from "@/content/site";
 
 export function SiteFooter() {
@@ -7,7 +7,7 @@ export function SiteFooter() {
     <footer className="bg-ink text-ink-foreground">
       <div className="container-site grid gap-10 py-14 md:grid-cols-4">
         <div className="md:col-span-1">
-          <img src={logoWhite.url} alt="DuplaÁsz" width={133} height={60} className="h-12 w-auto" loading="lazy" />
+          <img src={logoWhite} alt="DuplaÁsz" width={133} height={60} className="h-12 w-auto" loading="lazy" />
           <p className="mt-4 max-w-xs text-sm text-ink-foreground/70">
             Upholstery and restoration workshop, plus a store for upholstery materials.
           </p>
