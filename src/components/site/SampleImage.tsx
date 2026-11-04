@@ -5,7 +5,7 @@ type Props = {
   alt: string;
   className?: string;
   priority?: boolean;
-  /** Shows a small "Sample image" tag so stock photos aren't mistaken for real projects. */
+  /** Az illusztrációkat jelölő felirat megkülönbözteti azokat a valódi munkáktól. */
   tag?: boolean;
 };
 
@@ -24,7 +24,7 @@ export function SampleImage({ src, alt, className, priority, tag = true }: Props
       />
       {tag && (
         <figcaption className="absolute bottom-2 left-2 rounded bg-ink/75 px-2 py-0.5 text-[0.7rem] font-medium text-ink-foreground">
-          Sample image
+          Illusztráció
         </figcaption>
       )}
     </figure>

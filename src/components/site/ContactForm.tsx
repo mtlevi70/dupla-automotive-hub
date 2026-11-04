@@ -1,22 +1,23 @@
 import { useState, type FormEvent } from "react";
+import { ChevronDown } from "lucide-react";
 import { z } from "zod";
 
 const MAX_FILES = 5;
 const MAX_MB = 10;
 
 export const contactSchema = z.object({
-  name: z.string().trim().min(2, "Please enter your name.").max(100),
-  email: z.string().trim().email("Please enter a valid email address.").max(255),
-  phone: z.string().trim().max(40).optional(),
-  topic: z.enum(["project", "store", "other"]),
-  message: z.string().trim().min(10, "Please tell us a little more (at least 10 characters).").max(2000),
-  consent: z.literal(true, { errorMap: () => ({ message: "Please agree so we can reply to you." }) }),
+  name: z.string().trim().min(2, "A névnek legalább két karakterből kell állnia.").max(100, "A név legfeljebb 100 karakter lehet."),
+  email: z.string().trim().email("Érvényes e-mail-cím szükséges.").max(255, "Az e-mail-cím legfeljebb 255 karakter lehet."),
+  phone: z.string().trim().max(40, "A telefonszám legfeljebb 40 karakter lehet.").optional(),
+  topic: z.enum(["project", "store", "other"], { errorMap: () => ({ message: "Érvényes téma kiválasztása szükséges." }) }),
+  message: z.string().trim().min(10, "Az üzenetnek legalább 10 karakterből kell állnia.").max(2000, "Az üzenet legfeljebb 2000 karakter lehet."),
+  consent: z.literal(true, { errorMap: () => ({ message: "A válaszadáshoz hozzá kell járulni az adatok kezeléséhez." }) }),
 });
 
 type Errors = Partial<Record<string, string>>;
 
 const field =
-  "mt-1.5 w-full rounded-md border border-input bg-card px-3 py-2.5 text-base outline-none transition-colors focus-visible:border-primary aria-[invalid=true]:border-destructive";
+  "w-full rounded-md border border-input bg-card px-3 py-2.5 text-base outline-none transition-colors focus-visible:border-primary aria-[invalid=true]:border-destructive";
 
 export function ContactForm() {
   const [errors, setErrors] = useState<Errors>({});
@@ -25,7 +26,7 @@ export function ContactForm() {
   function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
-    // Honeypot: bots fill hidden fields; silently ignore.
+    // Rejtett csapdamező: a robotok által kitöltött űrlapok figyelmen kívül maradnak.
     if (fd.get("company_website")) return;
 
     const files = (fd.getAll("photos") as File[]).filter((f) => f.size > 0);
@@ -41,8 +42,8 @@ export function ContactForm() {
     if (!result.success) {
       for (const issue of result.error.issues) next[String(issue.path[0])] ??= issue.message;
     }
-    if (files.length > MAX_FILES) next["photos"] = `You can attach up to ${MAX_FILES} photos.`;
-    else if (files.some((f) => f.size > MAX_MB * 1024 * 1024)) next["photos"] = `Each photo must be under ${MAX_MB} MB.`;
+    if (files.length > MAX_FILES) next["photos"] = `Legfeljebb ${MAX_FILES} fénykép csatolható.`;
+    else if (files.some((f) => f.size > MAX_MB * 1024 * 1024)) next["photos"] = `Egy fénykép mérete legfeljebb ${MAX_MB} MB lehet.`;
     setErrors(next);
     const firstKey = Object.keys(next)[0];
     if (firstKey) {
@@ -50,8 +51,8 @@ export function ContactForm() {
       document.getElementById(firstKey)?.focus();
       return;
     }
-    // TODO: connect sending here (e.g. POST result.data + files to your endpoint).
-    setNotice("Your message looks good, but online sending isn't connected yet. Please call or email us for now.");
+    // TODO: a beküldés bekötése (például a result.data és a fájlok továbbítása egy végpontra).
+    setNotice("Az űrlap kitöltése rendben van, de online még nem küldhető el. Egyelőre telefonon vagy e-mailben lehet érdeklődni.");
   }
 
   const err = (k: string) =>
@@ -62,36 +63,39 @@ export function ContactForm() {
     <form onSubmit={onSubmit} noValidate className="space-y-5 rounded-xl border bg-card p-6 md:p-8">
       <div className="grid gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="text-sm font-medium">Name *</label>
-          <input id="name" name="name" autoComplete="name" className={field} {...aria("name")} />
+          <label htmlFor="name" className="text-sm font-medium">Név *</label>
+          <input id="name" name="name" autoComplete="name" className={`mt-1.5 ${field}`} {...aria("name")} />
           {err("name")}
         </div>
         <div>
-          <label htmlFor="email" className="text-sm font-medium">Email *</label>
-          <input id="email" name="email" type="email" autoComplete="email" className={field} {...aria("email")} />
+          <label htmlFor="email" className="text-sm font-medium">E-mail-cím *</label>
+          <input id="email" name="email" type="email" autoComplete="email" className={`mt-1.5 ${field}`} {...aria("email")} />
           {err("email")}
         </div>
         <div>
-          <label htmlFor="phone" className="text-sm font-medium">Phone <span className="text-muted-foreground">(optional)</span></label>
-          <input id="phone" name="phone" type="tel" autoComplete="tel" className={field} />
+          <label htmlFor="phone" className="text-sm font-medium">Telefonszám <span className="text-muted-foreground">(nem kötelező)</span></label>
+          <input id="phone" name="phone" type="tel" autoComplete="tel" className={`mt-1.5 ${field}`} />
         </div>
         <div>
-          <label htmlFor="topic" className="text-sm font-medium">What's it about?</label>
-          <select id="topic" name="topic" defaultValue="project" className={field}>
-            <option value="project">A workshop project</option>
-            <option value="store">A product in the store</option>
-            <option value="other">Something else</option>
-          </select>
+          <label htmlFor="topic" className="text-sm font-medium">Érdeklődés tárgya</label>
+          <div className="relative mt-1.5">
+            <select id="topic" name="topic" defaultValue="project" className={`${field} appearance-none pr-10`}>
+              <option value="project">Kárpitos- vagy restaurálási munka</option>
+              <option value="store">Üzletben kapható termék</option>
+              <option value="other">Egyéb érdeklődés</option>
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+          </div>
         </div>
       </div>
       <div>
-        <label htmlFor="message" className="text-sm font-medium">Your message *</label>
-        <p className="text-sm text-muted-foreground">What is the item, roughly how big, and what would you like done?</p>
-        <textarea id="message" name="message" rows={6} className={field} {...aria("message")} />
+        <label htmlFor="message" className="text-sm font-medium">Üzenet *</label>
+        <p className="text-sm text-muted-foreground">Milyen tárgyról van szó, körülbelül mekkora, és milyen munka szükséges?</p>
+        <textarea id="message" name="message" rows={6} className={`mt-1.5 ${field}`} {...aria("message")} />
         {err("message")}
       </div>
       <div>
-        <label htmlFor="photos" className="text-sm font-medium">Photos <span className="text-muted-foreground">(optional, up to {MAX_FILES})</span></label>
+        <label htmlFor="photos" className="text-sm font-medium">Fényképek <span className="text-muted-foreground">(nem kötelező, legfeljebb {MAX_FILES} kép)</span></label>
         <input
           id="photos"
           name="photos"
@@ -104,18 +108,18 @@ export function ContactForm() {
         {err("photos")}
       </div>
       <div className="hidden" aria-hidden="true">
-        <label htmlFor="company_website">Leave this empty</label>
+        <label htmlFor="company_website">Ezt a mezőt üresen kell hagyni</label>
         <input id="company_website" name="company_website" tabIndex={-1} autoComplete="off" />
       </div>
       <div>
         <label className="flex items-start gap-3 text-sm">
           <input id="consent" name="consent" type="checkbox" className="size-5 accent-primary" {...aria("consent")} />
-          <span>I agree that DuplaÁsz may use these details to reply to my request. {"["}Privacy policy link{"]"}</span>
+          <span>Hozzájárulok, hogy a DuplaÁsz a megadott adataimat a megkeresésem megválaszolásához felhasználja. [Adatkezelési tájékoztató]</span>
         </label>
         {err("consent")}
       </div>
       <button type="submit" className="w-full rounded-md bg-primary px-5 py-3 font-semibold text-primary-foreground transition-colors hover:bg-primary-hover sm:w-auto">
-        Send request
+        Érdeklődés elküldése
       </button>
       <div role="status" aria-live="polite">
         {notice && <p className="rounded-md bg-primary-soft p-4 text-sm text-accent-foreground">{notice}</p>}

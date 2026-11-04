@@ -16,49 +16,49 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "Project Gallery – DuplaÁsz" },
-      { name: "description", content: "Photos of upholstery and restoration work: cars, motorcycles, couches, armchairs, boats, equipment and antiques." },
-      { property: "og:title", content: "Project Gallery – DuplaÁsz" },
-      { property: "og:description", content: "Browse finished upholstery and restoration projects by category." },
+      { title: "Munkáink galériája – DuplaÁsz" },
+      { name: "description", content: "Kárpitos- és restaurálási munkák képei: autók, motorkerékpárok, kanapék, fotelek, hajók, berendezések és antik bútorok." },
+      { property: "og:title", content: "Munkáink galériája – DuplaÁsz" },
+      { property: "og:description", content: "Kárpitos- és restaurálási munkák képei kategóriák szerint." },
     ],
   }),
   component: Gallery,
 });
 
-const categories = ["All", "Cars & motorcycles", "Couches & chairs", "Boats", "Equipment", "Antiques"] as const;
+const categories = ["Összes", "Autók és motorok", "Kanapék és székek", "Hajók", "Berendezések", "Antik bútorok"] as const;
 type Category = (typeof categories)[number];
 
-// Replace with real project photos as they become available.
-const projects: { img: string; title: string; cat: Exclude<Category, "All"> }[] = [
-  { img: carInterior, title: "Classic car interior", cat: "Cars & motorcycles" },
-  { img: vehicle, title: "Vehicle seats", cat: "Cars & motorcycles" },
-  { img: motoSeat, title: "Motorcycle saddle", cat: "Cars & motorcycles" },
-  { img: sofa, title: "Sofa reupholstery", cat: "Couches & chairs" },
-  { img: armchair, title: "Velvet armchair", cat: "Couches & chairs" },
-  { img: marine, title: "Boat cushions", cat: "Boats" },
-  { img: foam, title: "Treatment table padding", cat: "Equipment" },
-  { img: antique, title: "Antique chair restoration", cat: "Antiques" },
+// Valódi projektfotókra cserélendők, amint rendelkezésre állnak.
+const projects: { img: string; title: string; cat: Exclude<Category, "Összes"> }[] = [
+  { img: carInterior, title: "Klasszikus autó belső tere", cat: "Autók és motorok" },
+  { img: vehicle, title: "Járműülések", cat: "Autók és motorok" },
+  { img: motoSeat, title: "Motorkerékpár-ülés", cat: "Autók és motorok" },
+  { img: sofa, title: "Kanapé átkárpitozása", cat: "Kanapék és székek" },
+  { img: armchair, title: "Bársonyfotel", cat: "Kanapék és székek" },
+  { img: marine, title: "Hajópárnák", cat: "Hajók" },
+  { img: foam, title: "Kezelőágy párnázása", cat: "Berendezések" },
+  { img: antique, title: "Antik szék restaurálása", cat: "Antik bútorok" },
 ];
 
 function Gallery() {
-  const [active, setActive] = useState<Category>("All");
+  const [active, setActive] = useState<Category>("Összes");
   const [open, setOpen] = useState<number | null>(null);
-  const shown = active === "All" ? projects : projects.filter((p) => p.cat === active);
+  const shown = active === "Összes" ? projects : projects.filter((p) => p.cat === active);
 
   return (
     <>
       <section className="bg-surface">
         <div className="container-site py-12 md:py-20">
-          <p className="eyebrow">Gallery</p>
-          <h1 className="mt-4 text-4xl md:text-6xl">Work from the workshop</h1>
+          <p className="eyebrow">Galéria</p>
+          <h1 className="mt-4 text-4xl md:text-6xl">Munkák a műhelyből</h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground">
-            A look at finished projects. Pick a category to see only that kind of work.
+            Ízelítő a műhelyben vállalt munkákból. A képek kategóriák szerint szűrhetők.
           </p>
         </div>
       </section>
 
       <section className="container-site py-12 md:py-16">
-        <div role="group" aria-label="Filter projects" className="flex flex-wrap gap-2">
+        <div role="group" aria-label="Munkák szűrése" className="flex flex-wrap gap-2">
           {categories.map((c) => (
             <button
               key={c}
@@ -83,8 +83,8 @@ function Gallery() {
               <button
                 type="button"
                 onClick={() => setOpen(i)}
-                aria-label={`View larger: ${p.title}`}
-                className="block w-full cursor-zoom-in overflow-hidden rounded-md transition-opacity hover:opacity-90"
+                aria-label={`Kép nagyítása: ${p.title}`}
+                className="block w-full cursor-pointer overflow-hidden rounded-md transition-opacity hover:opacity-90"
               >
                 <SampleImage src={p.img} alt={p.title} className="aspect-[4/3]" />
               </button>
@@ -99,7 +99,7 @@ function Gallery() {
         <Lightbox items={shown} index={open} onClose={() => setOpen(null)} onIndex={setOpen} />
       )}
 
-      <CtaBand title="Have something similar in mind?" text="Send us a few photos and we'll tell you what's possible." />
+      <CtaBand title="Hasonló elképzelés?" text="Néhány fénykép és egy rövid leírás alapján szívesen elmondjuk, milyen megoldások jöhetnek szóba." />
     </>
   );
 }

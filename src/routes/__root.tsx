@@ -20,16 +20,16 @@ function NotFoundComponent() {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-7xl font-bold text-foreground">404</h1>
-        <h2 className="mt-4 text-xl font-semibold text-foreground">Page not found</h2>
+        <h2 className="mt-4 text-xl font-semibold text-foreground">Az oldal nem található</h2>
         <p className="mt-2 text-sm text-muted-foreground">
-          The page you're looking for doesn't exist or has been moved.
+          A keresett oldal nem létezik, vagy más címre került.
         </p>
         <div className="mt-6">
           <Link
             to="/"
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Go home
+            Vissza a főoldalra
           </Link>
         </div>
       </div>
@@ -48,10 +48,10 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          This page didn't load
+          Az oldal nem tölthető be
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
-          Something went wrong on our end. You can try refreshing or head back home.
+          Hiba történt a betöltés során. Érdemes újrapróbálkozni vagy visszatérni a főoldalra.
         </p>
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
@@ -61,13 +61,13 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
             }}
             className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
           >
-            Try again
+            Újrapróbálkozás
           </button>
           <a
             href="/"
             className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium text-foreground transition-colors hover:bg-accent"
           >
-            Go home
+            Vissza a főoldalra
           </a>
         </div>
       </div>
@@ -80,9 +80,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DuplaÁsz – Upholstery, Restoration & Materials" },
-      { name: "description", content: "Upholstery workshop and materials store: furniture, vehicles, boats, equipment and antique restoration." },
+      { title: "DuplaÁsz – Kárpitozás, restaurálás és alapanyagok" },
+      { name: "description", content: "Kárpitosműhely és szaküzlet: bútorok, járművek, hajók és különféle berendezések kárpitozása, antik darabok restaurálása." },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "hu_HU" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
@@ -92,7 +93,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Rubik:wght@400;500;600;700&display=swap",
       },
     ],
   }),
@@ -104,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="hu">
       <head>
         <HeadContent />
       </head>

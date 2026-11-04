@@ -1,23 +1,23 @@
-// Central business details. Everything in [brackets] is a placeholder to replace.
+// Központi üzleti adatok. A szögletes zárójelben szereplő értékek helyőrzők.
 export const business = {
   name: "DuplaÁsz",
-  phone: "[Phone number]",
+  phone: "[Telefonszám]",
   phoneHref: "tel:+0000000000",
-  email: "[email@example.com]",
+  email: "[E-mail-cím]",
   emailHref: "mailto:email@example.com",
-  address: "[Street address]",
-  city: "[City, Postcode]",
+  address: "[Utca, házszám]",
+  city: "[Irányítószám, település]",
   hours: [
-    { days: "Monday – Friday", time: "[Opening hours]" },
-    { days: "Saturday", time: "[Opening hours]" },
-    { days: "Sunday", time: "[Closed / hours]" },
+    { days: "Hétfő–péntek", time: "[Nyitvatartás]" },
+    { days: "Szombat", time: "[Nyitvatartás]" },
+    { days: "Vasárnap", time: "[Zárva / nyitvatartás]" },
   ],
 };
 
 export const nav = [
-  { to: "/", label: "Home" },
-  { to: "/services", label: "Workshop services" },
-  { to: "/gallery", label: "Gallery" },
-  { to: "/store", label: "Materials store" },
-  { to: "/contact", label: "Contact" },
+  { to: "/", label: "Főoldal" },
+  { to: "/services", label: "Szolgáltatások" },
+  { to: "/gallery", label: "Galéria" },
+  { to: "/store", label: "Szaküzlet" },
+  { to: "/contact", label: "Kapcsolat" },
 ] as const;

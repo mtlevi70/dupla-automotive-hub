@@ -11,10 +11,10 @@ export function CtaBand({ title, text }: { title: string; text: string }) {
         </div>
         <div className="flex flex-wrap gap-3">
           <Link to="/contact" className="rounded-md bg-background px-5 py-3 font-semibold text-foreground transition-opacity hover:opacity-90">
-            Send a request
+            Érdeklődés küldése
           </Link>
           <a href={business.phoneHref} className="rounded-md border border-primary-foreground/40 px-5 py-3 font-semibold hover:bg-primary-foreground/10">
-            Call {business.phone}
+            Telefon: {business.phone}
           </a>
         </div>
       </div>

@@ -9,11 +9,11 @@ export function SiteFooter() {
         <div className="md:col-span-1">
           <img src={logoWhite} alt="DuplaÁsz" width={133} height={60} className="h-12 w-auto" loading="lazy" />
           <p className="mt-4 max-w-xs text-sm text-ink-foreground/70">
-            Upholstery and restoration workshop, plus a store for upholstery materials.
+            Kárpitozás, restaurálás és kárpitos szaküzlet egy helyen.
           </p>
         </div>
         <div>
-          <h2 className="font-sans text-sm font-semibold uppercase tracking-wider text-ink-foreground/60">Pages</h2>
+          <h2 className="font-sans text-sm font-semibold uppercase tracking-wider text-ink-foreground/60">Oldalak</h2>
           <ul className="mt-4 space-y-2 text-sm">
             {nav.map((n) => (
               <li key={n.to}>
@@ -23,7 +23,7 @@ export function SiteFooter() {
           </ul>
         </div>
         <div>
-          <h2 className="font-sans text-sm font-semibold uppercase tracking-wider text-ink-foreground/60">Contact</h2>
+          <h2 className="font-sans text-sm font-semibold uppercase tracking-wider text-ink-foreground/60">Kapcsolat</h2>
           <address className="mt-4 space-y-2 text-sm not-italic">
             <p>{business.address}<br />{business.city}</p>
             <p><a href={business.phoneHref} className="hover:underline">{business.phone}</a></p>
@@ -31,7 +31,7 @@ export function SiteFooter() {
           </address>
         </div>
         <div>
-          <h2 className="font-sans text-sm font-semibold uppercase tracking-wider text-ink-foreground/60">Opening hours</h2>
+          <h2 className="font-sans text-sm font-semibold uppercase tracking-wider text-ink-foreground/60">Nyitvatartás</h2>
           <dl className="mt-4 space-y-2 text-sm">
             {business.hours.map((h) => (
               <div key={h.days} className="flex justify-between gap-4">
@@ -45,7 +45,7 @@ export function SiteFooter() {
       <div className="border-t border-ink-foreground/10">
         <div className="container-site flex flex-col gap-2 py-5 text-xs text-ink-foreground/60 sm:flex-row sm:justify-between">
           <p>© {new Date().getFullYear()} {business.name}</p>
-          <p>Photos on this site are sample images until workshop photos are added.</p>
+          <p>A képek egyelőre illusztrációk; a műhely saját fotói később kerülnek fel az oldalra.</p>
         </div>
       </div>
     </footer>

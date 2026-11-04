@@ -10,28 +10,28 @@ import { CtaBand } from "@/components/site/CtaBand";
 export const Route = createFileRoute("/store")({
   head: () => ({
     meta: [
-      { title: "Upholstery Materials Store – Foam, Leather, Fabrics | DuplaÁsz" },
-      { name: "description", content: "Our store stocks upholstery foam, car and motorcycle seat foam, leather, fabrics, tacks, hardware, tools and supplies." },
-      { property: "og:title", content: "Upholstery Materials Store – DuplaÁsz" },
-      { property: "og:description", content: "Foam, leather, fabrics, tools and supplies for professionals and DIY upholsterers." },
+      { title: "Kárpitos szaküzlet – szivacs, bőr, szövet | DuplaÁsz" },
+      { name: "description", content: "Kárpitos szivacsok, autó- és motorülés-szivacsok, bőrök, szövetek, díszszegek, vasalatok, szerszámok és kellékek." },
+      { property: "og:title", content: "Kárpitos szaküzlet – DuplaÁsz" },
+      { property: "og:description", content: "Szivacsok, bőrök, szövetek, szerszámok és kellékek szakembereknek és otthoni kárpitozáshoz." },
     ],
   }),
   component: Store,
 });
 
 const main = [
-  { img: foam, t: "Foam", d: "Upholstery foam in different densities and thicknesses, specialist cushioning, and foam for car and motorcycle seats." },
-  { img: vehicle, t: "Leather", d: "Natural and synthetic leather for furniture, vehicle interiors and other upholstery work." },
-  { img: store, t: "Textiles", d: "A wide range of upholstery fabrics — colours, weaves, textures and performance materials." },
+  { img: foam, t: "Szivacsok", d: "Különböző sűrűségű és vastagságú kárpitos szivacsok, speciális párnázóanyagok, valamint autó- és motorülés-szivacsok." },
+  { img: vehicle, t: "Bőrök", d: "Természetes bőrök és műbőrök bútorokhoz, járműbelsőkhöz és más kárpitosmunkákhoz." },
+  { img: store, t: "Kárpitszövetek", d: "Sokféle színű, szövésű és tapintású kárpitszövet, köztük nagy igénybevételre alkalmas anyagok." },
 ];
 
 const other = [
-  "Upholstery nails, decorative tacks & rivets",
-  "Furniture handles & hardware",
-  "Upholstery tools & equipment",
-  "Threads, needles & sewing accessories",
-  "Straps, webbing & support materials",
-  "Wadding, batting & other supplies",
+  "Kárpitos szegek, díszszegek és szegecsek",
+  "Bútorfogantyúk és vasalatok",
+  "Kárpitos szerszámok és eszközök",
+  "Cérnák, tűk és varrási kellékek",
+  "Pántok, hevederek és alátámasztó anyagok",
+  "Vatta, bélésanyagok és más kellékek",
 ];
 
 function Store() {
@@ -40,26 +40,26 @@ function Store() {
       <section className="bg-surface">
         <div className="container-site grid items-center gap-10 py-12 md:py-20 lg:grid-cols-2">
           <div>
-            <p className="eyebrow">Materials store</p>
-            <h1 className="mt-4 text-4xl md:text-6xl">Everything you need to upholster</h1>
+            <p className="eyebrow">Kárpitos szaküzlet</p>
+            <h1 className="mt-4 text-4xl md:text-6xl">Minden, ami a kárpitozáshoz kell</h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-              Our shop is open to professionals and to anyone working on their own project. Come in, see and feel the
-              materials, and ask for advice.
+              Az üzletben szakemberek és saját kezűleg kárpitozók is válogathatnak. Az anyagokat személyesen is meg lehet nézni
+              és megtapintani, a választáshoz pedig tanács is kérhető.
             </p>
             <p className="mt-4 text-sm text-muted-foreground">
-              We don't sell online — please visit us or get in touch to ask about a specific product.
+              Online vásárlásra nincs lehetőség. Az üzlet személyesen látogatható, egy-egy termékről pedig telefonon vagy e-mailben is lehet érdeklődni.
             </p>
           </div>
-          <SampleImage src={store} alt="Shelves of upholstery fabrics and leather" priority className="aspect-[4/3]" />
+          <SampleImage src={store} alt="Polcok kárpitszövetekkel és bőrökkel" priority className="aspect-[4/3]" />
         </div>
       </section>
 
       <section className="container-site py-16 md:py-24">
-        <h2 className="text-3xl md:text-4xl">Our main ranges</h2>
+        <h2 className="text-3xl md:text-4xl">Főbb termékek</h2>
         <div className="mt-10 grid gap-8 md:grid-cols-3">
           {main.map((m) => (
             <article key={m.t}>
-              <SampleImage src={m.img} alt={`${m.t} in the store`} className="aspect-[4/5]" />
+              <SampleImage src={m.img} alt={`${m.t} az üzlet kínálatából`} className="aspect-[4/5]" />
               <h3 className="mt-4 text-2xl">{m.t}</h3>
               <p className="mt-2 text-muted-foreground">{m.d}</p>
             </article>
@@ -70,18 +70,18 @@ function Store() {
       <section className="bg-surface py-16 md:py-24">
         <div className="container-site grid items-center gap-10 md:grid-cols-2">
           <div>
-            <h2 className="text-3xl md:text-4xl">And the rest of the toolbox</h2>
+            <h2 className="text-3xl md:text-4xl">További kellékek</h2>
             <ul className="mt-6 space-y-3">
               {other.map((o) => (
                 <li key={o} className="flex gap-3"><Check className="mt-0.5 size-5 shrink-0 text-primary" aria-hidden />{o}</li>
               ))}
             </ul>
           </div>
-          <SampleImage src={hardware} alt="Decorative tacks, hammer, thread and webbing" className="aspect-[4/3]" />
+          <SampleImage src={hardware} alt="Díszszegek, kalapács, cérna és heveder" className="aspect-[4/3]" />
         </div>
       </section>
 
-      <CtaBand title="Looking for something specific?" text="Ask us before you make the trip — we'll tell you what we have." />
+      <CtaBand title="Egy bizonyos termék kellene?" text="Indulás előtt érdemes érdeklődni, hogy éppen kapható-e." />
     </>
   );
 }

@@ -58,7 +58,7 @@ export function Lightbox({
         <div className="relative">
           <img src={item.img} alt={item.title} className="max-h-[78vh] w-auto max-w-full rounded-md object-contain" />
           <span className="absolute left-3 top-3 rounded-full bg-foreground/70 px-3 py-1 text-xs font-medium text-background">
-            Sample image
+            Illusztráció
           </span>
         </div>
         <figcaption className="mt-4 text-center text-background">
@@ -69,15 +69,15 @@ export function Lightbox({
         </figcaption>
       </figure>
 
-      <button type="button" aria-label="Close" onClick={onClose} className={`${btn} right-4 top-4`}>
+      <button type="button" aria-label="Bezárás" onClick={onClose} className={`${btn} right-4 top-4`}>
         <X className="h-6 w-6" />
       </button>
       {items.length > 1 && (
         <>
-          <button type="button" aria-label="Previous image" onClick={(e) => { e.stopPropagation(); prev(); }} className={`${btn} left-4 top-1/2 -translate-y-1/2`}>
+          <button type="button" aria-label="Előző kép" onClick={(e) => { e.stopPropagation(); prev(); }} className={`${btn} left-4 top-1/2 -translate-y-1/2`}>
             <ChevronLeft className="h-7 w-7" />
           </button>
-          <button type="button" aria-label="Next image" onClick={(e) => { e.stopPropagation(); next(); }} className={`${btn} right-4 top-1/2 -translate-y-1/2`}>
+          <button type="button" aria-label="Következő kép" onClick={(e) => { e.stopPropagation(); next(); }} className={`${btn} right-4 top-1/2 -translate-y-1/2`}>
             <ChevronRight className="h-7 w-7" />
           </button>
         </>
